@@ -111,7 +111,7 @@
 </ul>
 <h2 id="server-configuration">Server configuration</h2>
 <p>Goteo has been tested under Nginx and Apache configurations.</p>
-<p>You will need to build a <code>dist</code> production folder an point the webserver onto it. Use <code>grunt build</code> to create a minimized assets environment or <code>grunt build:devel</code> for javascript/css debugging.</p>
+<p>You will need to build a <code>dist</code> production folder an point the webserver onto it. Use <code>grunt build</code> to create a minimized assets or <code>grunt build:devel</code> for javascript/css debugging.</p>
 <p>At this point, there are still no production-ready releases. Please refer to the <a href="developers/environment.html">developers</a> documentation for more info.</p>
 <h3 id="apache-config">Apache config:</h3>
 <p>Modrewrite must be enabled for apache below 2.2.16:</p>
@@ -171,11 +171,11 @@
 <p>Both scripts should be applied in a MySQL console:</p>
 <pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/structure.sql
 mysql -u your_user -p your_password &lt; db/install/data.sql</code></pre>
-<p>This should setted up a empty system with only one user &quot;root&quot;.</p>
+<p>This should give you an empty system with only one user &quot;root&quot;.</p>
 <p>Login with user &quot;root&quot; and password &quot;root&quot; (no quotes).
 Go <code>http://your.intallation.site/admin/users/edit/root</code> to change the password and email
 Try login with that password and manage the contents at <a href="http://your.intallation.site/admin">http://your.intallation.site/admin</a></p>
-<p>However, we haven't tested in any production database and very likely errors will be thrown. Debugging info will be appreciated.</p>
+<p>However, we haven't tested it in any production database and very likely errors will be thrown. Debugging info will be appreciated.</p>
 <h2 id="goteo-configuration">Goteo configuration</h2>
 <p>Place in here a non-git-tracked copy of your <code>settings.yml</code></p>
 <p>Use <code>demo-settings.yml</code> or <code>vagrant-settings.yml</code> as a example.</p>

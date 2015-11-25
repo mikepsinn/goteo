@@ -104,7 +104,7 @@
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h2 id="template-system">Template system</h2>
 <p>The new template system in Goteo uses <a href="http://www.foilphp.it">FOIL</a> which is a powerful php-native template system.</p>
-<p>However, there's still a lot of the legacy views in use. They will coexists until we can full get rid of the old system.</p>
+<p>However, there's still a lot of the legacy views in use. They will coexist until we can fully get rid of the old system.</p>
 <p>This document compares the old and new template system and highlights the main differences:</p>
 <p><strong>Old class system:</strong></p>
 <p><code>\Goteo\Core\View::get('template.html.php', array( 'obj' =&gt; ... ));</code></p>
@@ -114,7 +114,7 @@
 <p><code>$this-&gt;viewResponse('template', ['obj' =&gt; ...]);</code></p>
 <h2 id="main-differences">Main differences</h2>
 <p><strong>Before:</strong></p>
-<p>Variables where located inside the array  <code>$vars[]</code> (or event for even older behaviour inside the <code>$this</code> <a href="http://php.net/manual/es/class.arrayobject.php">ArrayObject</a> instance);</p>
+<p>Variables were located inside the array  <code>$vars[]</code> (or event for even older behaviour inside the <code>$this</code> <a href="http://php.net/manual/es/class.arrayobject.php">ArrayObject</a> instance);</p>
 <p>File <code>template.html.php</code></p>
 <pre><code class="language-php">&lt;?php
 
@@ -132,7 +132,7 @@ echo $this['variable']; // non-escaped
 ?&gt;</code></pre>
 <p><strong>After:</strong></p>
 <p>Variables are instantiated by default as properties of the object <code>$this</code> (that's Foil's behaviour).</p>
-<p><strong>NOTE</strong>: For compatibility reasons it an automatic array <code>$this-&gt;vars</code> it's created with all variables copied inside. New views (or completely refactored) must not use this array.</p>
+<p><strong>NOTE</strong>: For compatibility reasons an automatic array <code>$this-&gt;vars</code> is created with all variables copied inside. New views (or completely refactored) must not use this array.</p>
 <p>File <code>template.php</code></p>
 <pre><code class="language-php">&lt;?php
 // Object
@@ -150,7 +150,7 @@ echo $this-&gt;vars['variable']; // HTML escaped if it's a string or a simple ar
 <h2 id="new-features">New features</h2>
 <p>FOIL supports inheritance, custom functions &amp; a great variables manipulation capabilities between templates.</p>
 <p><strong>Basic operation:</strong></p>
-<p>Things starts with a basic layout used as base by the other templates. Please refer to the official documentation of Foil to know more about this.</p>
+<p>It starts with a basic layout used as the base by the other templates. Please refer to the official documentation of Foil to know more about this.</p>
 <p>File <code>layout.php</code></p>
 <pre><code class="language-php">&lt;html&gt;
 &lt;head&gt;
@@ -274,8 +274,7 @@ src/Goteo/Util/Foil/TextUtils.php</code></pre>
 <p>Custom functions can be called like this:</p>
 <pre><code class="language-php">&lt;a href="#"&gt;&lt;?= $this-&gt;text('view-project') ?&gt;&lt;/a&gt;</code></pre>
 <h2 id="guidelines">Guidelines</h2>
-<p>Ideally, templates must be keep as simple as possible, we will try to keep this guidelines for the new views using Foil.</p>
-<p>These are guidelines extracted from the <a href="http://platesphp.com/templates/syntax/">Plates templates system</a>:</p>
+<p>Ideally, templates must be kept as simple as possible, we will try to follow these guidelines for the new views using Foil (extracted from the <a href="http://platesphp.com/templates/syntax/">Plates templates system</a>):</p>
 <ul>
 <li>Always use HTML with inline PHP. Never use blocks of PHP.</li>
 <li>Always escape potentially dangerous variables prior to outputting using the built-in escape functions. More on escaping <a href="http://www.foilphp.it/docs/DATA/RETRIEVE-DATA.html">here</a>.</li>
