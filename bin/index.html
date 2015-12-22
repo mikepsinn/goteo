@@ -54,6 +54,11 @@
                                             Upgrade
                                         </a>
                                     </li>
+                                                                    <li class="">
+                                        <a href="http://goteofoundation.github.io/goteo/docs/console.html">
+                                            Console scripts
+                                        </a>
+                                    </li>
                                                             </ul>
                                                     <p class="text-muted">
                                 Developers
@@ -85,6 +90,11 @@
                                             Plugins & extending
                                         </a>
                                     </li>
+                                                                    <li class="">
+                                        <a href="http://goteofoundation.github.io/goteo/docs/developers/consoledev.html">
+                                            Extending console
+                                        </a>
+                                    </li>
                                                             </ul>
                                                     <p class="text-muted">
                                 About
@@ -107,113 +117,8 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="goteo-scripts">Goteo scripts</h1>
-<p>Part of the behaviour of Goteo must be achieved by the use of console comands.
-These commands processes end-round termination project status changes, refunding payments for failed processes, etc.</p>
-<p>All commmands uses the <a href="http://symfony.com/doc/current/components/console/introduction.html">Symfony Console component</a></p>
-<p>Should be run in a terminal with the PHP cli:</p>
-<pre><code class="language-bash">php bin/console</code></pre>
-<p>Or, if bin/console is executable, simply type (in the goteo project folder):</p>
-<pre><code class="language-bash">./bin/console</code></pre>
-<p>Last commands should show you a list of available commands.</p>
-<p>Any command has his help message:</p>
-<pre><code class="language-bash">./bin/console test --help</code></pre>
-<h2 id="mandatory-cron-commands">Mandatory Cron commands:</h2>
-<p>Goteo system needs to execute some periodic tasks in order to keep the projects funding status up to date. Other task involve sending mails to owners and investors (backers) and database cleaning.</p>
-<h2 id="goteo-commands">Goteo Commands:</h2>
-<ol>
-<li>
-<p><code>./bin/console endround</code> This is the most important command of all. Should be run by cron process once a day in order to check and change projects status, process refunds (if needed) among other stuff (like sending mails to owner or backers).
-This command triggers <code>./bin/console refund</code> command to process refunds for failed projects.
-Running this command without the <code>--update</code> options will not make any changes.
-Run <code>./bin/console endround --help</code> for options and description</p>
-</li>
-<li>
-<p><code>./bin/console refund</code> This command allows to process refund invests manually or authomatically.
-Running this command without the <code>--update</code> options will not make any changes.
-Run <code>./bin/console refund --help</code> for options and description</p>
-</li>
-<li>
-<p><code>./bin/console cron</code> This programs just runs other commands based on a schedule.<br />
-Schedule table is in <code>Resources/crontab.yml</code>
-This command should be placed in a cron management system with the <code>--lock</code> option activated:
-<strong>Cron line suggested example</strong>
-<code>* * * * *   www-data    nice /usr/bin/php /path/to/installation/bin/console cron --lock --logmail &gt; /dev/null 2&gt;&amp;1</code></p>
-</li>
-<li>
-<p><code>./bin/console mailing</code> This program processes pending massive mailing. This makes use of the concurrent capabilites [<a href="http://symfony.com/doc/current/components/process.html](Symfony">http://symfony.com/doc/current/components/process.html](Symfony</a> process commponent) so be aware that you'll need (<a href="http://php.net/manual/es/function.proc-open.php)[proc_open">http://php.net/manual/es/function.proc-open.php)[proc_open</a>()] function active in your PHP installation.</p>
-</li>
-<li>
-<p><code>./bin/console sendmail</code> This program sends and individual mail from the massive mailing list. Althoug it can be used manually for testing, it's bassically used by the <code>mailing</code> task to make concurrent sending.</p>
-</li>
-<li>
-<p><code>./bin/console projectwatch</code> This command sends advises to the project's owners depending on the status of of the project (advises base on template mails).
-<strong>Note that this command is old and needs to be refactored (You cannont execute this command in read-only mode)</strong></p>
-</li>
-<li><code>./bin/console dbverify</code> Another old command that needs refactoring. Cleans some old databases entries.<br />
-<strong>Note that this command is old and needs to be refactored (You cannont execute this command in read-only mode)</strong></li>
-</ol>
-<h2 id="global-options">Global options</h2>
-<p>Some options are common for all commands:</p>
-<ol>
-<li>
-<p><code>--help</code> displays help about the command.
-Example: <code>./bin/console endround --help</code></p>
-</li>
-<li>
-<p><code>--verbose</code> Displays on the standard console output (like <code>echo</code> command) the generated log
-Example: <code>./bin/console endround --verbose</code></p>
-</li>
-<li>
-<p><code>--logmail</code> Emails the full log if a ERROR level is triggered.
-Email should be defined into <code>settings.yml</code> -&gt; <code>mail.fail</code>
-Example: <code>./bin/console endround --logmail</code></p>
-</li>
-<li><code>--lock</code> Locks the process by using the <code>GET_LOCK</code> function on MySQL server.
-This way the running process can be used in a replicated distributed cron system
-ensuring that only one instance of the process will be running.
-<strong>Note</strong>: Command called without this option may be allowed to execute even if some lock exists
-Example: <code>./bin/console endround --lock --logmail</code></li>
-</ol>
-<h2 id="developers">Developers:</h2>
-<p><strong>Dev commands</strong>:</p>
-<p><code>./bin/console dev:statusinit</code> if you have the <code>extend/goteo-dev</code> plugin activated this command allows to create some projects to test the endround process.
-Use <code>./bin/console dev:statusinit --clean</code> to delete all created data</p>
-<p>Check the TestCommand as an example of how to create a command:
-<code>src/Goteo/Command/TestCommand.php</code></p>
-<p>Commands can be added to the console system in the <code>extend/plugin-name/start.php</code> such as:</p>
-<pre><code class="language-php">use Symfony\Component\DependencyInjection\Reference;
-use Goteo\Console\Console;
-use Goteo\Application\App;
-use Goteo\Console\Command\CronCommand;
-
-// Console add command
-Console::add(new MyPlugin\Command\MyPluginCommand());
-
-// If needed, you can add your own listeners to handle ConsoleEvents
-// this will allow you to add some extra functionality to some actions
-// 
-// See file src/Console/ConsoleEvents.php 
-// and url http://symfony.com/doc/current/components/console/events.html
-// for more information
-
-// Adding custom services to the service container:
-$sc = App::getServiceContainer();
-// Take advantage of the general service container
-// Adding new listener for some actions
-$sc-&gt;register('console.myplugin.mylistener', 
-              'Goteo\Console\EventListener\ConsoleMyPluginAddonListener')
-   -&gt;setArguments([new Reference('console_logger')]);
-$sc-&gt;getDefinition('console_dispatcher')
-   -&gt;addMethodCall('addSubscriber', [new Reference('console.myplugin.mylistener')]);
-
-// Cron jobs can be added directly to the main CronCommand task if needed:
-CronCommand::addCrontabLine([
-    'schedule' =&gt; '25 ' . (Config::get('env') == 'real' ? 5 : 6) . ' * * *',
-    'command' =&gt; 'bin/console myplugin:mycommand --logmail --lock &gt; /dev/null',
-    'type' =&gt; 'php',
-    'nice' =&gt; true
-]);</code></pre>
+                    <h1 id="console-scripts">Console scripts</h1>
+<p>Referer to the <em>Console</em> section for documentation in console commands.</p>
                 </section>
 
             </div>

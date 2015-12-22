@@ -54,6 +54,11 @@
                                             Upgrade
                                         </a>
                                     </li>
+                                                                    <li class="">
+                                        <a href="http://goteofoundation.github.io/goteo/docs/console.html">
+                                            Console scripts
+                                        </a>
+                                    </li>
                                                             </ul>
                                                     <p class="text-muted">
                                 Developers
@@ -83,6 +88,11 @@
                                                                     <li class="">
                                         <a href="http://goteofoundation.github.io/goteo/docs/developers/extend.html">
                                             Plugins & extending
+                                        </a>
+                                    </li>
+                                                                    <li class="">
+                                        <a href="http://goteofoundation.github.io/goteo/docs/developers/consoledev.html">
+                                            Extending console
                                         </a>
                                     </li>
                                                             </ul>
@@ -181,6 +191,10 @@ mysql -u your_user -p your_password &lt; db/install/data.sql</code></pre>
 Go <code>http://your.intallation.site/admin/users/edit/root</code> to change the password and email
 Try login with that password and manage the contents at <a href="http://your.intallation.site/admin">http://your.intallation.site/admin</a></p>
 <p>However, we haven't tested it in any production database and very likely errors will be thrown. Debugging info will be appreciated.</p>
+<h2 id="cron-configuration">Cron configuration</h2>
+<p>You will need to add a cron/crontab line in order to process severals project related events:</p>
+<pre><code class="language-cron">* * * * *   nice /usr/bin/php /path/to/installation/bin/console cron --lock --logmail &gt; /dev/null 2&gt;&amp;1</code></pre>
+<p>Refer to the <strong>Console scripts</strong> documentation for more info</p>
 <h2 id="goteo-configuration">Goteo configuration</h2>
 <p>Place in here a non-git-tracked copy of your <code>settings.yml</code></p>
 <p>Use <code>demo-settings.yml</code> or <code>vagrant-settings.yml</code> as a example.</p>
