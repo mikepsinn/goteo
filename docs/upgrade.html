@@ -121,18 +121,22 @@
 <h2 id="upgrading-from-version-2">Upgrading from version 2</h2>
 <p>Version 2 is <strong>unsupported</strong> and can be found here:
 <a href="https://github.com/Goteo/goteo">https://github.com/Goteo/goteo</a></p>
-<p>At this point, all of this is quite experimental, use it at your own risk.</p>
-<p>There are two upgrade SQL scripts:</p>
+<p>At this point, all of this is quite experimental, use it at your own risk.
+Needless to say that you MUST have backups in case things go wrong.</p>
+<p>There are these upgrade SQL scripts:</p>
 <ul>
 <li><code>db/upgrade/upgrade-v2-to-v3.sql</code></li>
-<li><code>db/upgrade/upgrade-from- v3.0e-to-v3.0.1.sql</code></li>
-<li><code>db/upgrade/upgrade-from- v3.0.1-to-v3.0.2.sql</code></li>
+<li><code>db/upgrade/upgrade-from-v3.0e-to-v3.0.1.sql</code></li>
+<li><code>db/upgrade/upgrade-from-v3.0.1-to-v3.0.2.sql</code></li>
+<li><code>db/upgrade/upgrade-from-v3.0.2-to-v3.0.3.sql</code></li>
 </ul>
 <p>Both scripts should be applied in a MySQL console:</p>
 <pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/upgrade/upgrade-v2-to-v3.sql
-mysql -u your_user -p your_password &lt; db/upgrade/upgrade-from- v3.0e-to-v3.0.1.sql
-mysql -u your_user -p your_password &lt; db/upgrade/upgrade-from- v3.0.1-to-v3.0.2.sql</code></pre>
-<p>However, we haven't tested it in any production database and very likely errors will be thrown. Debugging info will be appreciated.</p>
+mysql -u your_user -p your_password &lt; db/upgrade/upgrade-from-v3.0e-to-v3.0.1.sql
+mysql -u your_user -p your_password &lt; db/upgrade/upgrade-from-v3.0.1-to-v3.0.2.sql
+mysql -u your_user -p your_password &lt; db/upgrade/upgrade-from-v3.0.2-to-v3.0.3.sql</code></pre>
+<p>However, we haven't tested it in any production database and very likely errors will be thrown.
+Debugging info will be appreciated.</p>
                 </section>
 
             </div>
