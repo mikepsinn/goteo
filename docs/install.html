@@ -186,6 +186,8 @@
 <p>Both scripts should be applied in a MySQL console:</p>
 <pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/structure.sql
 mysql -u your_user -p your_password &lt; db/install/data.sql</code></pre>
+<p>Then, apply these updates:</p>
+<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/upgrade-to-v3.0.3.sql</code></pre>
 <p>This should give you an empty system with only one user &quot;root&quot;.</p>
 <p>Login with user &quot;root&quot; and password &quot;root&quot; (no quotes).
 Go <code>http://your.intallation.site/admin/users/edit/root</code> to change the password and email
