@@ -126,11 +126,21 @@
 </ul>
 <h2 id="server-configuration">Server configuration</h2>
 <p>Goteo has been tested under Nginx and Apache configurations.</p>
-<p>You will need to build a <code>dist</code> production folder an point the webserver onto it. Use <code>grunt build</code> to create a minimized assets or <code>grunt build:devel</code> for javascript/css debugging.</p>
+<blockquote>
 <p>At this point, there are still no production-ready releases. Please refer to the <a href="developers/environment.html">developers</a> documentation for more info.</p>
+<p>You will need to install dependencies and to build a <code>dist</code> production folder to point the webserver onto it.</p>
+<p>We use <a href="https://getcomposer.org/">Composer</a> and <a href="http://gruntjs.com/">Grunt</a> for that. <a href="developers/environment.html">Be sure to have it installed in your system</a>.</p>
+<p><strong>Quick start</strong></p>
+<p>Install all the required dependencies:</p>
+<pre><code class="language-bash">composer install
+npm install</code></pre>
+<p>Create the compiled minimized system:</p>
+<pre><code class="language-bash">grunt build</code></pre>
+<p>Alternatively, use  <code>grunt build:devel</code> for javascript/css debugging.</p>
+</blockquote>
 <h3 id="apache-config">Apache config:</h3>
 <p>Modrewrite must be enabled for apache below 2.2.16:</p>
-<pre><code>&lt;IfModule mod_rewrite.c&gt;
+<pre><code class="language-apache">&lt;IfModule mod_rewrite.c&gt;
     Options -MultiViews
 
     RewriteEngine On
@@ -139,9 +149,9 @@
     RewriteRule ^ index.php [QSA,L]
 &lt;/IfModule&gt;</code></pre>
 <p>Alternatively, if you use Apache 2.2.16 or higher, you can use the FallbackResource directive to make your .htaccess even easier:</p>
-<pre><code>FallbackResource /index.php</code></pre>
+<pre><code class="language-apache">FallbackResource /index.php</code></pre>
 <h3 id="nginx-config">Nginx config:</h3>
-<pre><code>server {
+<pre><code class="language-nginxs">server {
     server_name domain.tld www.domain.tld;
     root /var/www/goteo-folder/dist;
 
@@ -187,11 +197,12 @@
 <pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/structure.sql
 mysql -u your_user -p your_password &lt; db/install/data.sql</code></pre>
 <p>Then, apply these updates:</p>
-<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/upgrade-to-v3.0.3.sql</code></pre>
+<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/upgrade-to-v3.0.6.sql</code></pre>
 <p>This should give you an empty system with only one user &quot;root&quot;.</p>
-<p>Login with user &quot;root&quot; and password &quot;root&quot; (no quotes).
+<p>Login with user <strong>&quot;root&quot;</strong> and password <strong>&quot;root&quot;</strong> (no quotes).
 Go <code>http://your.intallation.site/admin/users/edit/root</code> to change the password and email
 Try login with that password and manage the contents at <a href="http://your.intallation.site/admin">http://your.intallation.site/admin</a></p>
+<p>The <code>data.sql</code> script also creates demo project, you can remove all demo data by using the command <code>./bin/console dev:statusinit --erase'</code> from the <a href="developers/extend.html#dev-plugin">dev-plugin</a>.</p>
 <p>However, we haven't tested it in any production database and very likely errors will be thrown. Debugging info will be appreciated.</p>
 <h2 id="cron-configuration">Cron configuration</h2>
 <p>You will need to add a cron/crontab line in order to process severals project related events:</p>

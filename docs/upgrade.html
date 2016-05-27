@@ -123,20 +123,19 @@
 <a href="https://github.com/Goteo/goteo">https://github.com/Goteo/goteo</a></p>
 <p>At this point, all of this is quite experimental, use it at your own risk.
 Needless to say that you MUST have backups in case things go wrong.</p>
-<p>There are these upgrade SQL scripts:</p>
-<ul>
-<li><code>db/upgrade/upgrade-v2-to-v3.sql</code></li>
-<li><code>db/upgrade/upgrade-from-v3.0e-to-v3.0.1.sql</code></li>
-<li><code>db/upgrade/upgrade-from-v3.0.1-to-v3.0.2.sql</code></li>
-<li><code>db/upgrade/upgrade-from-v3.0.2-to-v3.0.3.sql</code></li>
-</ul>
-<p>Both scripts should be applied in a MySQL console:</p>
+<p>The folder <code>db/upgrade</code> contains several sql script tha must be applied in the correct order:</p>
+<p>Apply the script by using the MySQL console:</p>
 <pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/upgrade/upgrade-v2-to-v3.sql
 mysql -u your_user -p your_password &lt; db/upgrade/upgrade-from-v3.0e-to-v3.0.1.sql
 mysql -u your_user -p your_password &lt; db/upgrade/upgrade-from-v3.0.1-to-v3.0.2.sql
-mysql -u your_user -p your_password &lt; db/upgrade/upgrade-from-v3.0.2-to-v3.0.3.sql</code></pre>
+mysql -u your_user -p your_password &lt; db/upgrade/upgrade-from-v3.0.2-to-v3.0.3.sql
+mysql -u your_user -p your_password &lt; db/upgrade/upgrade-from-v3.0.4-to-v3.0.5.sql
+mysql -u your_user -p your_password &lt; db/upgrade/upgrade-from-v3.0.5-to-v3.0.6.sql</code></pre>
 <p>However, we haven't tested it in any production database and very likely errors will be thrown.
 Debugging info will be appreciated.</p>
+<h2 id="other-upgrades">Other upgrades</h2>
+<p>Apply this script to import the new milestones:</p>
+<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/upgrade/upgrade-milestones.sql</code></pre>
                 </section>
 
             </div>
