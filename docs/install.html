@@ -150,6 +150,13 @@ npm install</code></pre>
 &lt;/IfModule&gt;</code></pre>
 <p>Alternatively, if you use Apache 2.2.16 or higher, you can use the FallbackResource directive to make your .htaccess even easier:</p>
 <pre><code class="language-apache">FallbackResource /index.php</code></pre>
+<blockquote>
+<p><strong>NOTE:</strong></p>
+<ul>
+<li>If you want to debug the site, you must point the server to the <code>index_dev.php</code> file instead of <code>index.php</code>. This way error traces will be shown in the error pages</li>
+<li>If you cannot configure the server to point to the <code>dist/</code> folder, the <code>.htaccess</code> file on the root folder can be used as alternative</li>
+</ul>
+</blockquote>
 <h3 id="nginx-config">Nginx config:</h3>
 <pre><code class="language-nginxs">server {
     server_name domain.tld www.domain.tld;
@@ -188,14 +195,16 @@ npm install</code></pre>
     access_log /var/log/nginx/project_access.log;
 }</code></pre>
 <h2 id="database-configuration">Database configuration</h2>
-<p>A minimal system must be created, import this 2 SQL scripts:</p>
+<p>A minimal system must be created, import this 3 SQL scripts:</p>
 <ul>
 <li><code>db/install/structure.sql</code></li>
 <li><code>db/install/data.sql</code></li>
+<li><code>db/install/templates.sql</code></li>
 </ul>
 <p>Both scripts should be applied in a MySQL console:</p>
 <pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/structure.sql
-mysql -u your_user -p your_password &lt; db/install/data.sql</code></pre>
+mysql -u your_user -p your_password &lt; db/install/data.sql
+mysql -u your_user -p your_password &lt; db/install/templates.sql</code></pre>
 <p>Then, apply these updates:</p>
 <pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/upgrade-to-v3.0.6.sql</code></pre>
 <p>This should give you an empty system with only one user &quot;root&quot;.</p>
