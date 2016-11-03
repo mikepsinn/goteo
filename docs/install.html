@@ -154,7 +154,7 @@ npm install</code></pre>
 <p><strong>NOTE:</strong></p>
 <ul>
 <li>If you want to debug the site, you must point the server to the <code>index_dev.php</code> file instead of <code>index.php</code>. This way error traces will be shown in the error pages</li>
-<li>If you cannot configure the server to point to the <code>dist/</code> folder, the <code>.htaccess</code> file on the root folder can be used as alternative</li>
+<li>If you cannot configure the server to point to the <code>dist/</code> folder, the <code>.htaccess</code> file on the root folder can be used as alternative (using this solution will force the use of an assets URL pointing to the dist/ folder.)</li>
 </ul>
 </blockquote>
 <h3 id="nginx-config">Nginx config:</h3>
@@ -202,11 +202,12 @@ npm install</code></pre>
 <li><code>db/install/templates.sql</code></li>
 </ul>
 <p>Both scripts should be applied in a MySQL console:</p>
-<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/structure.sql
-mysql -u your_user -p your_password &lt; db/install/data.sql
+<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/structure.sql</code></pre>
+<p>Then, apply the minor-version update:</p>
+<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/upgrade-to-v3.0.7.sql</code></pre>
+<p>And, finally, import some bare data:</p>
+<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/data.sql
 mysql -u your_user -p your_password &lt; db/install/templates.sql</code></pre>
-<p>Then, apply these updates:</p>
-<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/upgrade-to-v3.0.6.sql</code></pre>
 <p>This should give you an empty system with only one user &quot;root&quot;.</p>
 <p>Login with user <strong>&quot;root&quot;</strong> and password <strong>&quot;root&quot;</strong> (no quotes).
 Go <code>http://your.intallation.site/admin/users/edit/root</code> to change the password and email
