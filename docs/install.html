@@ -195,21 +195,22 @@ npm install</code></pre>
     access_log /var/log/nginx/project_access.log;
 }</code></pre>
 <h2 id="database-configuration">Database configuration</h2>
-<p>A minimal system must be created, import this 3 SQL scripts:</p>
+<p>First you'll need an empty database (<strong>your_goteo_db</strong>) with user (<strong>your_user</strong>) and password (<strong>your_password</strong>).</p>
+<p>Once you got it, a minimal system must be created, import this 3 SQL scripts:</p>
 <ul>
 <li><code>db/install/structure.sql</code></li>
 <li><code>db/install/data.sql</code></li>
 <li><code>db/install/templates.sql</code></li>
 </ul>
 <p>Both scripts should be applied in a MySQL console:</p>
-<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/structure.sql</code></pre>
+<pre><code class="language-bash">mysql -u your_user -p your_password your_goteo_db &lt; db/install/structure.sql</code></pre>
 <p>Then, apply the minor-version update:</p>
-<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/upgrade-to-v3.0.7.sql</code></pre>
-<p>And, finally, import some bare data:</p>
-<pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/data.sql
-mysql -u your_user -p your_password &lt; db/install/templates.sql
-mysql -u your_user -p your_password &lt; db/install/glossary.sql
-mysql -u your_user -p your_password &lt; db/install/faq.sql</code></pre>
+<pre><code class="language-bash">mysql -u your_user -p your_password your_goteo_db &lt; db/install/upgrade-to-v3.0.7.sql</code></pre>
+<p>And, finally, import some bare data (glossary and faq may be optional, or you can delete date afterwards):</p>
+<pre><code class="language-bash">mysql -u your_user -p your_password your_goteo_db &lt; db/install/data.sql
+mysql -u your_user -p your_password your_goteo_db &lt; db/install/templates.sql
+mysql -u your_user -p your_password your_goteo_db &lt; db/install/glossary.sql
+mysql -u your_user -p your_password your_goteo_db &lt; db/install/faq.sql</code></pre>
 <p>This should give you an empty system with only one user &quot;root&quot;.</p>
 <p>Login with user <strong>&quot;root&quot;</strong> and password <strong>&quot;root&quot;</strong> (no quotes).
 Go <code>http://your.intallation.site/admin/users/edit/root</code> to change the password and email
@@ -358,9 +359,9 @@ db:
     host:     localhost # Database host
     port:     3306      # Database port
     charset:  UTF-8     # Database charset
-    database: goteo     # Database schema (database name)
-    username: goteo     # Database user for the goteo database
-    password: password  # Password for the goteo database
+    database: your_goteo_db     # Database schema (database name)
+    username: your_user     # Database user for the goteo database
+    password: your_password  # Password for the goteo database
 
     # SELECT queries caching
     # set it as 'files' to enable sql cache
