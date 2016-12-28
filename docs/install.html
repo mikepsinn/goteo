@@ -207,7 +207,9 @@ npm install</code></pre>
 <pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/upgrade-to-v3.0.7.sql</code></pre>
 <p>And, finally, import some bare data:</p>
 <pre><code class="language-bash">mysql -u your_user -p your_password &lt; db/install/data.sql
-mysql -u your_user -p your_password &lt; db/install/templates.sql</code></pre>
+mysql -u your_user -p your_password &lt; db/install/templates.sql
+mysql -u your_user -p your_password &lt; db/install/glossary.sql
+mysql -u your_user -p your_password &lt; db/install/faq.sql</code></pre>
 <p>This should give you an empty system with only one user &quot;root&quot;.</p>
 <p>Login with user <strong>&quot;root&quot;</strong> and password <strong>&quot;root&quot;</strong> (no quotes).
 Go <code>http://your.intallation.site/admin/users/edit/root</code> to change the password and email
