@@ -49,7 +49,7 @@
                                             Install
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://goteofoundation.github.io/goteo/docs/upgrade.html">
                                             Upgrade
                                         </a>
@@ -117,31 +117,36 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="upgrade">UPGRADE</h1>
-<h2 id="upgrading-from-version-2">Upgrading from version 2</h2>
-<p>Version 2 is <strong>unsupported</strong> and can be found here:
-<a href="https://github.com/Goteo/goteo">https://github.com/Goteo/goteo</a></p>
-<p>At this point, all of this is quite experimental, use it at your own risk.
-Needless to say that you MUST have backups in case things go wrong.</p>
-<p>The folder <code>db/upgrade</code> contains several sql script tha must be applied in the correct order:</p>
-<p>Apply these scripts by using the MySQL console (you may apply only the needed ones depending on your version):</p>
-<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-v2-to-v3.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0e-to-v3.0.1.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.1-to-v3.0.2.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.2-to-v3.0.3.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.4-to-v3.0.5.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.5-to-v3.0.6.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.6-to-v3.0.7.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.7-to-v3.0.9.sql</code></pre>
-<p>However, we haven't tested it in any production database and very likely errors will be thrown.
-Debugging info will be appreciated.</p>
-<h2 id="other-upgrades">Other upgrades</h2>
-<p>Apply this script to import the new milestones:</p>
-<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-milestones.sql</code></pre>
-<p>Apply this script to import the new templates:</p>
-<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-templates.sql</code></pre>
-<p>Apply this script to recreate the new pages structure:</p>
-<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-pages.sql</code></pre>
+                    <h1 id="kaeduca-customization-plugin">Kaeduca customization plugin</h1>
+<p>Este plugin esta pensado para customizar Goteo.</p>
+<p>El funcionamiento está basado en la sustiticion de vistas.</p>
+<h2 id="vistas">Vistas:</h2>
+<p>Hay 3 tipos de vistas en goteo, las antiguas (legacy) y las nuevas (default y responsive).</p>
+<p>Las nuevas vistas permiten una mayor flexibilidad a la hora de sustituir partes, se usa el sistema de vistas <a href="http://www.foilphp.it/">Foil</a> (lectura recomendada si quereis cambiar muchas cosas).</p>
+<p>Las vistas &quot;legacy&quot; no permiten gran cosa, únicamente sustituir enteramente la vista.</p>
+<p>En general, para susittuir una vista solo hace falta crear el mismo archivo siguiendo la misma estructura de directorio dentro del plugin. Por ejemplo:</p>
+<p>Vista original (legacy):
+<em>Resources/templates/legacy/community.html.php</em>
+Vista sustituta (si existe):
+<em>extend/kaeduca/Resources/templates/legacy/community.html.php</em></p>
+<p>Vista original (Foil/default, no responsive):
+<em>Resources/templates/default/about/contact.php</em>
+Vista sustituta (si existe):
+<em>extend/kaeduca/Resources/templates/default/about/contact.php</em></p>
+<p>Vista original (Foil/responsive):
+<em>Resources/templates/responsive/project/home.php</em>
+Vista sustituta (si existe):
+<em>extend/kaeduca/Resources/templates/responsive/project/home.php</em></p>
+<p>La idea es sustituir todas las vistas &quot;legacy&quot; por tipo &quot;Foil/default&quot; o &quot;Foil/responsive&quot;. El paso a &quot;Foil/default&quot; es bastante simple pero require modificar un poco el controlador y la vista (la migración no está completamente acabada por falta de presupuesto, idealmente algun día se completará). El paso a responsive es progresivo pues requiere de nuevo diseño (se va implementando a medida que se necesita en Goteo).</p>
+<h2 id="custom-cssjavascript">Custom CSS/javascript:</h2>
+<p>El Css y javascript se compilan mediante la herramienta Grunt (ver <a href="http://goteofoundation.github.io/goteo/docs/install.html">http://goteofoundation.github.io/goteo/docs/install.html</a>).</p>
+<p>En el caso de kaeduca esta complicación simplemente consta de copiar los archivos de la carpeta <em>Resources/assets/css</em> a <em>dist/assets/kaeduca/css</em></p>
+<p>En el servidor actual de Godaddy he puesto un link simbolico de esa carpeta a la del plugin de manera que no hace falta compilar (siempre que no cambie la estructura del plugin).</p>
+<p>En resumen:</p>
+<p>Modificar los archivos:</p>
+<p><em>kaeduca/Resources/assets/css/default.css</em> (para vistas Foil/default)
+<em>kaeduca/Resources/assets/css/responsive.css</em> (para vistas Foil/responsive)
+<em>kaeduca/Resources/assets/css/legacy.css</em> (para vistas legacy)</p>
                 </section>
 
             </div>

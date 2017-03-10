@@ -120,7 +120,7 @@
                     <h1 id="installation">Installation</h1>
 <h2 id="server-requirements">Server requirements</h2>
 <ul>
-<li>PHP v5.4 or later with most common extension activated (GD, mcrypt, etc)</li>
+<li>PHP v5.6 or later with most common extension activated (GD, mcrypt, etc)</li>
 <li>Apache, Nginx or any other server with ModRewrite activated</li>
 <li>MySQL 5.6 or later</li>
 </ul>
@@ -203,14 +203,14 @@ npm install</code></pre>
 <li><code>db/install/templates.sql</code></li>
 </ul>
 <p>Both scripts should be applied in a MySQL console:</p>
-<pre><code class="language-bash">mysql -u your_user -p your_password your_goteo_db &lt; db/install/structure.sql</code></pre>
+<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/install/structure.sql</code></pre>
 <p>Then, apply the minor-version update:</p>
-<pre><code class="language-bash">mysql -u your_user -p your_password your_goteo_db &lt; db/install/upgrade-to-v3.0.7.sql</code></pre>
+<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/install/upgrade-to-v3.0.9.sql</code></pre>
 <p>And, finally, import some bare data (glossary and faq may be optional, or you can delete date afterwards):</p>
-<pre><code class="language-bash">mysql -u your_user -p your_password your_goteo_db &lt; db/install/data.sql
-mysql -u your_user -p your_password your_goteo_db &lt; db/install/templates.sql
-mysql -u your_user -p your_password your_goteo_db &lt; db/install/glossary.sql
-mysql -u your_user -p your_password your_goteo_db &lt; db/install/faq.sql</code></pre>
+<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/install/data.sql
+mysql -u your_user -pyour_password your_goteo_db &lt; db/install/templates.sql
+mysql -u your_user -pyour_password your_goteo_db &lt; db/install/glossary.sql
+mysql -u your_user -pyour_password your_goteo_db &lt; db/install/faq.sql</code></pre>
 <p>This should give you an empty system with only one user &quot;root&quot;.</p>
 <p>Login with user <strong>&quot;root&quot;</strong> and password <strong>&quot;root&quot;</strong> (no quotes).
 Go <code>http://your.intallation.site/admin/users/edit/root</code> to change the password and email
