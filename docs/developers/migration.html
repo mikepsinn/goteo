@@ -117,8 +117,24 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="legacy-views-migration">Legacy views migration:</h1>
-<p>This document is about how to change Controllers and views (templates) from the old system to the new one:</p>
+                    <h1 id="mysql-migrations">MySQL migrations</h1>
+<p>Starting in version <strong>3.2</strong> a SQL migrations uses the library <a href="http://kohkimakimoto.github.io/lib-migration/">LibMigration</a>.</p>
+<p>The console command <code>migrate</code> must be used to create sql migrations:</p>
+<p><strong>Creates a new PHP Class file to write migrations inside:</strong></p>
+<pre><code class="language-bash">php bin/console create some_description</code></pre>
+<p>A new file will be created in <code>db/migrations/{timestamp}_dbname_some_description.php</code>, edit it and write the UP/DOWN SQL commands there.</p>
+<p>To apply migrations these commands can be used:</p>
+<p><strong>Shows the current status:</strong></p>
+<pre><code class="language-bash">php bin/console migrate</code></pre>
+<p><strong>Execute all the migrations up pending:</strong></p>
+<pre><code class="language-bash">php bin/console migrate all</code></pre>
+<p><strong>Execute only the next migration up pending:</strong></p>
+<pre><code class="language-bash">php bin/console migrate up</code></pre>
+<p>In case you need to downgrade:</p>
+<p><strong>Execute the next migration down:</strong></p>
+<pre><code class="language-bash">php bin/console migrate up</code></pre>
+<h1 id="legacy-views-migration">Legacy views migration:</h1>
+<p>This is about how to change Controllers and views (templates) from the old system to the new one:</p>
 <h2 id="response">Response</h2>
 <p>New controllers are intended to be used with the <a href="http://symfony.com/doc/current/components/routing/introduction.html">Route</a> component from Symfony. Therefore all must return a proper <a href="http://symfony.com/doc/current/components/http_foundation/introduction.html#response">Response</a>:</p>
 <p>Controllers can also return redirections by using the <a href="http://symfony.com/doc/current/components/http_foundation/introduction.html#redirecting-the-user">RedirectResponse</a> sub-class. In short, any sub-class of <code>Response</code> will do.</p>

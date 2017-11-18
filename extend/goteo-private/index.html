@@ -49,7 +49,7 @@
                                             Install
                                         </a>
                                     </li>
-                                                                    <li class="active">
+                                                                    <li class="">
                                         <a href="http://goteofoundation.github.io/goteo/docs/upgrade.html">
                                             Upgrade
                                         </a>
@@ -117,64 +117,14 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="upgrade">UPGRADE</h1>
-<h2 id="upgrading-in-versions-bigger-than">Upgrading in versions bigger than <strong>v3.2</strong></h2>
-<p>Anytime the Goteo code has been update you just need to run the comman <code>migrate</code>:</p>
-<p><strong>Shows if the systems needs some SQL upgrade</strong>:</p>
-<pre><code>php bin/console migrate</code></pre>
-<p><strong>Executes the upgrade, if needed</strong>:</p>
-<pre><code>php bin/console migrate all</code></pre>
-<h1 id="older-versions">Older versions</h1>
-<blockquote>
-<p>Use this instructions only as a reference if you already have a copy of goteo less than <strong>v3.2</strong></p>
-<p>To install Goteo from scratch, read <a href="install.html">INSTALL</a></p>
-<p>This instructions will bring you up to the <strong>v3.2</strong> version and, from there, you just keep updating using the <code>./bin/console migrate</code> tool.</p>
-</blockquote>
-<h2 id="upgrading-from-version-2">Upgrading from version 2</h2>
-<p>Version 2 is <strong>unsupported</strong> and can be found here:
-<a href="https://github.com/Goteo/goteo">https://github.com/Goteo/goteo</a></p>
-<p>We made un script to upgrade from <strong>v2</strong> to <strong>v3.0</strong>:</p>
-<pre><code>mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-v2-to-v3.sql</code></pre>
-<p>Apply it and then execute the next step to upgrade to <strong>v3.2</strong></p>
-<h2 id="upgrading-form-any-version-from">Upgrading form any version from <strong>3.0</strong> to <strong>3.2</strong></h2>
-<p>Needless to say that you MUST have backups in case things go wrong.</p>
-<p>The folder <code>db/upgrade</code> contains several sql script tha must be applied in the correct order:</p>
-<p>Apply these scripts by using the MySQL console (you may apply only the needed ones depending on your version):</p>
-<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0e-to-v3.0.1.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.1-to-v3.0.2.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.2-to-v3.0.3.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.4-to-v3.0.5.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.5-to-v3.0.6.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.6-to-v3.0.7.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.7-to-v3.0.9.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.0.9-to-v3.1.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.1-to-v3.2.sql</code></pre>
-<h2 id="other-upgrades-up-to-v32-only">Other upgrades (up to v3.2 only)</h2>
-<p>You better review the code of this SQL instructions before proceed</p>
-<p>Apply this script to import the new milestones:</p>
-<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-milestones.sql</code></pre>
-<p>Apply this script to import some new templates:</p>
-<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-templates.sql</code></pre>
-<p>Apply this script to recreate the pages structure:</p>
-<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-pages.sql</code></pre>
-<h2 id="old-manual-install-method-up-to">Old (manual) install method up to <strong>v3.2</strong></h2>
+                    <h1 id="goteo-extensions-for-goteoorg">Goteo Extensions for Goteo.org</h1>
+<p>This plugin adds custom features to Goteo:</p>
 <ul>
-<li><code>db/install/structure.sql</code></li>
-<li><code>db/install/upgrade-to-v3.1.sql</code></li>
-<li><code>db/install/data.sql</code></li>
-<li><code>db/install/templates.sql</code></li>
+<li>Issuing of donation certificates. This includes some extra forms to be filled by donors with their personal data for issuing tax refunds certificates. This only works for Spanish donors, most of the code is “hard-coded” (not configurable) and (may) contain sensitive internal data of the foundation.</li>
+<li>Public pages with Goteo Foundation particulars (like the Tax calculator page or the organization google’s public calendar view).</li>
+<li>Views and templates for the matchfunding process. Although internal models contains most of the processing code for multiplying monetary contributions. End user parts (such as the public page of a particular matchfunding call) and the internal administration submodules are not shared publicly. Payment addons and some additional cron processes are also private.</li>
+<li>An Omnipay’s module for handling payments with the spanish payment gateway used in Goteo.</li>
 </ul>
-<p>Both scripts should be applied in a MySQL console:</p>
-<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/install/structure.sql</code></pre>
-<p>Then, apply the minor-version update:</p>
-<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/install/upgrade-to-v3.1.sql</code></pre>
-<p>And, finally, import some bare data (glossary and faq may be optional, or you can delete date afterwards):</p>
-<pre><code class="language-bash">mysql -u your_user -pyour_password your_goteo_db &lt; db/install/data.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/install/templates.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/install/glossary.sql
-mysql -u your_user -pyour_password your_goteo_db &lt; db/install/faq.sql</code></pre>
-<p>Upgrade to v3.2</p>
-<pre><code>mysql -u your_user -pyour_password your_goteo_db &lt; db/upgrade/upgrade-from-v3.1-to-v3.2.sql</code></pre>
                 </section>
 
             </div>
