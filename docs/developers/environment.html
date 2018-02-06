@@ -145,10 +145,16 @@
 <p>The first time, a vagrant local config file will be create a a <code>config/local-vagrant-settings.yml</code>. The env variable GOTEO_CONFIG_FILE will be append to the .bashrc file in vagrant poining to that file. Database will be autocreated and dependencies installed.</p>
 <p>You just need to log into vagrant and start the development server:</p>
 <pre><code class="language-bash">grunt serve</code></pre>
+<p><strong>Vagrant Apache dist testing</strong></p>
+<p>It is possible to build the distribution goteo package (for production sites) and test it in the same vagrant installation which is already configured to serve the content of the folder <code>/home/vagrant/goteo/dist</code>.</p>
+<p>Try it on by building the package (remember to log into vagrant first):</p>
+<pre><code class="language-bash">grunt build:dist</code></pre>
+<p>And, then pointing your browser to <a href="http://localhost:8080/">http://localhost:8080/</a>
+You can tweak the Apache configuration in <code>/etc/apache2/sites-enabled/goteo.conf</code> (inside vagrant)</p>
 <p><strong>Code updates</strong></p>
 <p>To update composer or npm dependencies when code is updated, you just need to log into vagrant (<code>vagrant ssh</code>) and run these commands:</p>
 <p>Node and composer dependencies:</p>
-<pre><code class="language-bash">cd /home/ubuntu/goteo
+<pre><code class="language-bash">cd /home/vagrant/goteo
 npm install
 composer install</code></pre>
 <p>It's also safe to run the MySQL migration tool to ensure database version is up to date:</p>
@@ -209,7 +215,7 @@ db:
     driver:   mysql     # Database driver (mysql)
     host:     0.0.0.0 # Database host
     port:     3307      # Database port
-    charset:  UTF-8     # Database charset
+    charset:  utf8mb4     # Database charset
     database: goteo     # Database schema (database name)
     username: root     # Database user for the goteo database
     password: root  # Password for the goteo database</code></pre>
@@ -238,16 +244,21 @@ Same as build, but the files created into <code>dist</code> will not be minimize
 Php standalone server. For localhost developing.</p>
 </li>
 <li>
-<p><strong>Run phpunit</strong>: <code>grunt deploy</code>
+<p><strong>Multi-threading development server</strong>: <code>grunt serve:nginx</code>
+For localhost developing as well. But you need to have nginx installed on your machine, it may speed up significantly the development process.</p>
+</li>
+<li>
+<p><strong>Deploy assets</strong>: <code>grunt deploy</code>
 Can be used to upload files assets to Amazon S3 (settings.yml must be configured)</p>
 </li>
 <li>
-<p><strong>Run phpunit</strong>: <code>grunt phpunit</code></p>
+<p><strong>Run phpunit</strong>: <code>./run-tests.sh</code>
+bash script to wrap phpunit tests (run it with <code>--help</code> for more info)</p>
 </li>
 <li>
 <p><strong>Default task</strong>: <code>grunt</code>
 This task is the same as execute as doing: <code>grunt lint</code>
-It performs static code analysis in order to quick detect mistakes or misspellings</p>
+It performs static code analysis in order to quick detect mistakes or misspe -hllings</p>
 </li>
 <li><strong>Code linter</strong>: <code>grunt lint</code>
 Same as default</li>

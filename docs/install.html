@@ -118,6 +118,8 @@
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h1 id="installation">Installation</h1>
+<p>This guide shows you how to install a standard copy of the Goteo code. To personalize your installation (changing views, etc) it's strongly recommended to create a plugin where views are overwritten. Otherwise any change you make to the code will be lost on software updates (or you will go throught a lot of pain updating the code).</p>
+<p>Please referer to the &quot;<a href="http://goteofoundation.github.io/goteo/docs/developers/extend.html">extend section</a>&quot; to learn how to do that. </p>
 <h2 id="server-requirements">Server requirements</h2>
 <ul>
 <li>PHP v5.6 (PHP 7 recommended) or later with extensions <code>gd</code>, <code>mcrypt</code>, <code>curl</code>, <code>mbstring</code>, <code>json</code>, <code>mysql</code> activated</li>
@@ -283,7 +285,7 @@ db:
     driver:   mysql     # Database driver (mysql)
     host:     localhost # Database host
     port:     3306      # Database port
-    charset:  UTF-8     # Database charset
+    charset:  utf8mb4     # Database charset
     database: your_goteo_db     # Database schema (database name)
     username: your_user     # Database user for the goteo database
     password: your_password  # Password for the goteo database
@@ -410,6 +412,12 @@ oauth:
 
     openid:
         active: true
+
+# Optional analytics ID's
+# Example:
+# google: UA-0000000-01
+analytics:
+    google:
 </code></pre>
 <h2 id="database-install">Database install</h2>
 <p>First you'll need an empty database and have your <code>config/settings.yml</code> file with the section <strong>db</strong> properly configured with your database parameters.</p>
@@ -442,13 +450,37 @@ Try login with that password and manage the contents at <a href="http://your.int
 <p><strong>NOTE:</strong></p>
 <ul>
 <li>If you want to debug the site, you must point the server to the <code>index_dev.php</code> file instead of <code>index.php</code>. This way error traces will be shown in the error pages</li>
-<li>If you cannot configure the server to point to the <code>dist/</code> folder, the <code>.htaccess</code> file on the root folder can be used as alternative (using this solution will force the use of an assets URL pointing to the dist/ folder.)</li>
+<li>If you cannot configure the server to point to the <code>dist/</code> folder, the <code>.htaccess</code> file on the root folder can be used as alternative (using this solution will force the use of the URL assets to point to the dist/ folder.)</li>
 </ul>
 </blockquote>
-<h3 id="nginx-config">Nginx config:</h3>
-<pre><code class="language-nginxs">server {
+<h3 id="apache-24-config-demo">Apache 2.4 config demo:</h3>
+<pre><code class="language-apach2">&lt;VirtualHost *:80&gt;
+    ServerName domain.tld
+
+    ServerAdmin webmaster@localhost
+    DocumentRoot /path/to/my/goteo-folder/dist
+
+    # Custom settings for apache
+    SetEnv GOTEO_CONFIG_FILE /path/to/my/settings.yml
+
+    FallbackResource /index.php
+
+    &lt;Directory /path/to/my/goteo-folder/dist&gt;
+        Options Indexes FollowSymlinks
+        AllowOverride All
+        Require all granted
+    &lt;/Directory&gt;
+
+    #LogLevel info ssl:warn
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+&lt;/VirtualHost&gt;</code></pre>
+<h3 id="nginx-config-demo">Nginx config demo:</h3>
+<pre><code class="language-nginx">server {
     server_name domain.tld www.domain.tld;
-    root /var/www/goteo-folder/dist;
+    root /path/to/my/goteo-folder/dist;
 
     location / {
         # try to serve file directly, fallback to front controller

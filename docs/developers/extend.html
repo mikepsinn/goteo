@@ -130,17 +130,17 @@
 <p>All plugins must follow this structure (inside the <code>extend</code> folder):</p>
 <pre><code>extend/
 └── plugin-name
-    ├── start.php         &lt;- Mandatory, Will be called on app init  
-    ├── manifest.yml      &lt;- Mandatory, Should specify name, version
-    ├── README.md         &lt;- Optional
-    │── src/
-    │   └── Vendor/
-    │       └── Foo/
-    │           └── Bar.php
+    ├── start.php         &lt;- Mandatory, Will be called on app init
+    ├── manifest.yml      &lt;- Mandatory, Should specify name, version
+    ├── README.md         &lt;- Optional
+    │── src/
+    │   └── Vendor/
+    │       └── Foo/
+    │           └── Bar.php
     │
-    └── Resources/       &lt;- Optional
-        ├── templates/   &lt;- Optional, templates will be searched here first
-        ...
+    └── Resources/       &lt;- Optional
+        ├── templates/   &lt;- Optional, templates will be searched here first
+        ...
 </code></pre>
 <h3 id="the">The <code>manifest.yml</code> file:</h3>
 <p>This file should follow this structure:</p>
@@ -149,14 +149,45 @@
 
 name: PluginName
 version: 1.0
+
+# Advanced/optional:
 # Next key/value array will be used by Grunt to copy this files under the "dist/" directory
+
 assets:
     # Will be copied as dist/plugin-name/assets
     Resources/assets: plugin-name/assets
     ...</code></pre>
 <h3 id="the-1">The <code>start.php</code> file:</h3>
-<p>This will be fully documented some day. </p>
-<p>Meanwhile, please take a look at the file  <code>extend/goteo-dev/start.php</code>  as an example.</p>
+<p>Probably, the most common task to be achieved is to personalize the home page or any other view. A minimal start.php file should be something like this:</p>
+<pre><code class="language-php">&lt;?php
+
+// initial start.php can be empty, everything here is optionall
+
+use Goteo\Application\Config;
+use Goteo\Application\Lang;
+
+// Autoload additional Classes (if necessary)
+Config::addAutoloadDir(__DIR__ .'/src');
+
+// Adding lang files (if necessary)
+Lang::addYamlTranslation('en', __DIR__ .'/my-translations/en/some-file.yml');
+
+// ... other things...
+</code></pre>
+<p>Take a look at the file  <code>extend/goteo-dev/start.php</code>  as a more complex example.</p>
+<p>The important part about creating a dummy plugin like this is that any view can be overwritten by just making a replacement in the same directory relative to your plugin folder.</p>
+<p>For example, if you create a plugin named &quot;my-plugin&quot;, you can overwrite the file <code>Resources/templates/responsive/partials/footer.php</code> by creating the same file in the path <code>extend/my-plugin/Resources/templates/responsive/partials/footer.php</code></p>
+<p>Basically, you'll end with a plugin directory structure like this:</p>
+<pre><code>extend/
+└── my-plugin
+    ├── start.php
+    ├── manifest.yml
+    └── Resources/
+        └── templates/
+            └── responsive/
+                └── partials/
+                    └── footer.php
+</code></pre>
 <h2 id="dev-plugin">Dev plugin</h2>
 <p>There's a demo plugin with some utilities distributed with the code, the  <code>goteo-dev</code> plugin.
 It adds a toolbar at the bottom of the page with debugging info.
