@@ -118,7 +118,7 @@
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
                     <h2 id="template-system">Template system</h2>
-<p>The new template system in Goteo uses <a href="http://www.foilphp.it">FOIL</a> which is a powerful php-native template system.</p>
+<p>The new template system in Goteo uses <a href="https://foilphp.github.io/Foil/">FOIL</a> which is a powerful php-native template system.</p>
 <p>However, there's still a lot of the legacy views in use. They will coexist until we can fully get rid of the old system.</p>
 <p>This document compares the old and new template system and highlights the main differences:</p>
 <p><strong>Old class system:</strong></p>
@@ -186,9 +186,9 @@ echo $this-&gt;vars['variable']; // HTML escaped if it's a string or a simple ar
     &lt;h1&gt;User Profile&lt;/h1&gt;
     &lt;p&gt;Hello, &lt;?=$this-&gt;name?&gt;&lt;/p&gt;
 &lt;?php $this-&gt;stop() ?&gt;</code></pre>
-<p>More info:<br />
-<a href="http://www.foilphp.it/docs/TEMPLATES/INHERITANCE.html">http://www.foilphp.it/docs/TEMPLATES/INHERITANCE.html</a><br />
-<a href="http://www.foilphp.it/docs/DATA/PASS-DATA.html">http://www.foilphp.it/docs/DATA/PASS-DATA.html</a>  </p>
+<p>More info:</p>
+<p><a href="https://foilphp.github.io/Foil/docs/TEMPLATES/INHERITANCE.html">https://foilphp.github.io/Foil/docs/TEMPLATES/INHERITANCE.html</a>
+<a href="https://foilphp.github.io/Foil/docs/DATA/PASS-DATA.html">https://foilphp.github.io/Foil/docs/DATA/PASS-DATA.html</a></p>
 <h2 id="template-inheritance">Template inheritance:</h2>
 <p>The new Goteo views can have themes, currently there are 2, <code>default</code> &amp; <code>responsive</code> (which will be the future theme). Located under the folder <code>Resources/templates/</code>. There's another sub-folder <code>legacy</code> which contains the old view system (which will disappear someday).</p>
 <p>Plugins can override any view by recreating the same structure and placing a new view with the same name:</p>
