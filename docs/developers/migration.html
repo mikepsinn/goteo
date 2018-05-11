@@ -215,7 +215,7 @@ Long Javascript blocks should be avoided as much as possible. Little scripts can
     &lt;/script&gt;
 
 &lt;?php $this-&gt;append() ?&gt;</code></pre>
-<ol>
+<ol start="4">
 <li>
 <p>References to the formers <code>$this['variable']</code> or <code>$vars['variable']</code> arrays must be replaced by calling the automatically escaped variable on the self-object <code>$this</code>: <code>&lt;?= $this-&gt;variable ?&gt;</code>. Un-escaped variables can be reached using the method <code>raw</code>: <code>&lt;?= $this-&gt;raw('variable') ?&gt;</code>. Check <a href="http://www.foilphp.it/docs/DATA/RETRIEVE-DATA.html">Foil documentation on this matter</a> for more info.</p>
 </li>
@@ -227,7 +227,7 @@ src/Goteo/Util/Foil/LangUtils.php
 src/Goteo/Util/Foil/Pages.php
 src/Goteo/Util/Foil/TextUtils.php</code></pre>
 <p><strong>Note</strong> plugins can also add methods in templates.</p>
-<ol>
+<ol start="6">
 <li>Also avoid using global vars inside templates. Needless to say that assign values into <code>$_SESSION</code> or <code>$_COOKIE</code> must be strictly avoided,
 Methods such as <code>$this-&gt;get_session('foo')</code> or <code>$this-&gt;get_cookie('foo')</code> can be used if absolutely necessary.</li>
 </ol>

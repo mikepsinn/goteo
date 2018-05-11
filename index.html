@@ -135,13 +135,46 @@ Some folders may have its own README.md file with comments. However, we will try
 <li><a href="http://goteofoundation.github.io/goteo/docs/install.html">Install</a></li>
 <li><a href="http://goteofoundation.github.io/goteo/docs/upgrade.html">Upgrade</a></li>
 </ul>
+<blockquote>
+<h3 id="docker-quickstart">Docker quickstart:</h3>
+<pre><code class="language-bash">cp config/docker-settings.yml config/local-docker-settings.yml
+docker-compose up</code></pre>
+<p>THen you can run commands inside the php container by using the wrapper <code>docker/exec</code>. If develping, we recommend to run this command in a separate terminal:</p>
+<pre><code class="language-bash">docker/exec grunt watch</code></pre>
+<p><a href="http://goteofoundation.github.io/goteo/docs/developers/environment.html#docker">More info</a></p>
+</blockquote>
 <h3 id="contributing">CONTRIBUTING</h3>
 <p>There's still a lot of documentation missing. We'll try to do our best completing it, however any help will be appreciated.</p>
 <ul>
 <li><a href="http://goteofoundation.github.io/goteo/docs/developers/environment.html">Developers</a></li>
 <li><a href="http://goteofoundation.github.io/goteo/release_notes.html">Credits</a></li>
 </ul>
-<p>This documentation is created using <a href="http://couscous.io">Couscous</a>.</p>
+<h3 id="translators">TRANSLATORS</h3>
+<p>Since version 3.3 where are using <a href="https://crowdin.com/">Crowdin</a> as a tool for collaborators translating the code. Feel free to join this awesome people who's contributed in traslating Goteo to many languages:</p>
+<translators><ul><li>Dan Walenter (cas3v0n)</li>
+    <li>Denver Moon (9003104)</li>
+    <li>José Peralta (elpoliglota) (josedpg11)</li>
+    <li>Chris_W</li>
+    <li>helpPAM</li>
+    <li>melsmacan</li>
+    <li>kguanzon (Kimberly Guanzon) (kim0421)</li>
+    <li>joao.cruz</li>
+    <li>pep_laDeriva</li>
+    <li>CataAz</li>
+    <li>Clint Mark Cortes (cortesclintmark)</li>
+    <li>zainalkhalid</li>
+    <li>franzancot</li>
+    <li>Udo Wierlemann (Udo.Wierlemann)</li>
+    <li>Herii (HERII12)</li>
+    <li>shaunmatthew</li>
+    <li>Ceyda Mutlu (translator93)</li>
+    <li>Júlia Petúlia Sol (juliaxsol)</li>
+    <li>enolp</li>
+    <li>elena-2018</li>
+    <li>firewall (Onrkskn)</li>
+</ul></translators>
+<p>You can join to the Crowdin translator team here: <a href="https://translate.goteo.org/">https://translate.goteo.org/</a></p>
+<p><em>This documentation is created using <a href="http://couscous.io">Couscous</a>.</em></p>
 <h2 id="license">License</h2>
 <p>The code licensed here under the <strong>GNU Affero General Public License</strong>, version 3 AGPL-3.0 has been developed by the Goteo team led by Platoniq and subsequently transferred to the Fundación Goteo, as detailed in <a href="http://www.goteo.org/about#info6">http://www.goteo.org/about#info6</a></p>
                 </section>

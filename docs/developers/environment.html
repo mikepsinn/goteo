@@ -133,12 +133,16 @@
 </ul>
 <p><strong>Composer</strong> is the most popular PHP package management, we use it too.</p>
 <h2 id="setting-up-environment">Setting up environment</h2>
-<p>You can set-up a development environment in your local machine by installing all required tools. Or, you can use a convenient Vagrant virtual machine with all tools ready to go.</p>
-<p>To install vagrant please refer to the official web site:</p>
+<p>You can set-up a development environment in your local machine by installing all required tools. Or, you can use either a Vagrant or Docker virtual machine with all tools ready to go.</p>
+<p>To install <code>docker</code> and <code>docker-compose</code> follow the instructions:</p>
+<p><a href="https://docs.docker.com/install/">https://docs.docker.com/install/</a>
+<a href="https://docs.docker.com/compose/install/">https://docs.docker.com/compose/install/</a></p>
+<p>To install vagrant refer to the official web site:</p>
 <p><a href="http://www.vagrantup.com/downloads">http://www.vagrantup.com/downloads</a></p>
 <p>You may install virtualbox as well:</p>
 <p><a href="https://www.virtualbox.org/wiki/Downloads">https://www.virtualbox.org/wiki/Downloads</a></p>
 <h1 id="using-vagrant-virtual-machine">Using Vagrant Virtual Machine</h1>
+<p><em>NOTE:</em> We think that docker is a better way to quickly install Goteo as it uses much less resources, probably we will deprecate the Vagrant development aproach in the future.</p>
 <p>The Vagrant file provided automatically configures a virtual machine with all necessary tools.</p>
 <p>Just open a terminal where you have your copy of Goteo code and execute:</p>
 <p>Start the virtual machine (it will be a while first time you do that):</p>
@@ -223,7 +227,7 @@ db:
     username: root     # Database user for the goteo database
     password: root  # Password for the goteo database</code></pre>
 <p>Otherwise, you can install mysql on your own machine and proceed to import the database into it.</p>
-<h1><a name="#grunt"></a>
+<h1><a name="grunt"></a>
 Using grunt in Goteo</h1>
 <p>Once you have your copy of grunt installed you need to install the tasks used.
 To do so you may just execute in the path where you have your copy of the Goteo code:</p>
@@ -266,6 +270,33 @@ It performs static code analysis in order to quick detect mistakes or misspe -hl
 <li><strong>Code linter</strong>: <code>grunt lint</code>
 Same as default</li>
 </ul>
+<h1><a name="docker"></a>
+Docker</h1>
+<p>We just started to work with Docker. For the moment is still experimental. We've only tested using Linux hosts.</p>
+<p>The first time, it is necessary to create a local docker config that you can personalize:</p>
+<pre><code class="language-bash">cp config/docker-settings.yml config/local-docker-settings.yml</code></pre>
+<p>Then, you can set up a development server using:</p>
+<pre><code class="language-bash">docker-compose up</code></pre>
+<p>At this point you should be able to point your browser to <a href="http://localhost:8081">http://localhost:8081</a> (or whatever host name you have in your local-docker-settings.yml).
+We recommend not to use the <code>-d</code> flag on <code>docker-compose</code> to be aware of the log messages while building the container or php/server errors while browsing.</p>
+<h3 id="tltr">TL;TR</h3>
+<p>The <code>docker-compose up</code> command executes <code>docker/php/init.sh</code> script, which is equivalent as running the next commands:</p>
+<pre><code class="language-bash">docker/exec composer install
+docker/exec npm install
+docker/exec bin/console migrate install
+docker/exec grunt build:tmp</code></pre>
+<p>You can (or must) run any of the above commands if the are changes in relevant files (database changes, css, javascript or public template files).</p>
+<p>In general, any command used in goteo should be executed in the docker virtual machine should by using the wrapper <code>docker/exec</code> as it will run the command with the proper user.</p>
+<p>If you want to test a production environment, you can pass the var <code>DEBUG=0</code> to the docker-compose command:</p>
+<pre><code class="language-bash">DEBUG=false docker-compose up</code></pre>
+<p>You can overwrite the default <code>local-docker-settings.yml</code> file with the GOTEO_CONFIG_FILE environment variable:</p>
+<pre><code class="language-bash">GOTEO_CONFIG_FILE=config/my-alternative-settings.yml docker-compose up</code></pre>
+<p>Finally -optionally-, by running the <code>grunt watch</code> command alone allows you to rebuild assets automatically while editing files. If this command is not executed, assets are copied and compiled only once at the beginning when <code>docker-compose up</code> runs.</p>
+<pre><code class="language-bash">docker/exec grunt watch</code></pre>
+<p>Upgrades and other commands can be executed the same way:</p>
+<pre><code class="language-bash">docker/exec bin/console migrate all
+docker/exec bin/console toolkit project
+docker/exec bin/console --help</code></pre>
                 </section>
 
             </div>

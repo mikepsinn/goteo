@@ -128,7 +128,7 @@
 <li>PHP v5.6 (PHP 7 recommended) or later with extensions <code>gd</code>, <code>mcrypt</code>, <code>curl</code>, <code>mbstring</code>, <code>json</code>, <code>mysql</code> activated</li>
 <li>Access to the terminal in the webserver and cron.</li>
 <li>Apache, Nginx or any other server with ModRewrite activated</li>
-<li>MySQL 5.6 or later</li>
+<li>MySQL 5.7 (or MariaDB 10.2) or later</li>
 </ul>
 <blockquote>
 <p>At this point, there are still no production-ready releases. Please refer to the <a href="developers/environment.html">developers</a> documentation for more info.</p>
@@ -232,8 +232,18 @@ payments:
         # headerImageUrl: Some URL image for the header
         # logoImageUrl: logo URL
         # borderColor: B5DADC
+        commissions: # Per-invests commissions
+            refunded:
+                fixed: 0.35 # Paypal charges 0.35€ per invest, non-returnable
+                percent: 0
+            charged:
+                fixed: 0.35 # Paypal charges 0.35€ per invest, non-returnable
+                percent: 3.4 # 3.4% of the amount per invest
+            # Other variables may be added on other methods and
+            # customize the calculateFee() in the corresponding class
 
     # This is a built-in payment method using internal credit
+    # Comissions can be configured here if needed
     pool:
         active: true
     # A stupid payment method defined in the plugin goteo-dev
