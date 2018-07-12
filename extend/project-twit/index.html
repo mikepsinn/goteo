@@ -125,12 +125,33 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="deprecated">DEPRECATED</h1>
-<p>This directory contains the historical SQL commmand updater.
-It won't be updated anymore</p>
-<p>The prefered way to update the database is now:</p>
-<pre><code class="language-bash">./bin/console migrate all</code></pre>
-<p>Referer to the <em>UPGRADE</em> section in docs for further documentation.</p>
+                    <h1 id="goteo-project-twitter-plugin">goteo-project-twitter-plugin</h1>
+<p>This is a plugin for the Goteo <a href="https://goteo.org">OpenSource Crowdfunding Platform</a>.</p>
+<p>This is the code of an example in the <a href="goteofoundation.github.io/goteo/docs/developers/events.html">documentation</a> of the <a href="https://github.com/goteofoundation/goteo">Goteo Source Code</a>.</p>
+<h2 id="what-does-it-do">What does it do?</h2>
+<p>It creates a twit every time a project is published in a Goteo installation.</p>
+<h2 id="configuration">Configuration</h2>
+<p>Download the source code of this plugin in the <code>extend/</code> folder of goteo, for example:</p>
+<pre><code class="language-bash">cd your-goteo-path/extend
+git clone https://github.com/microstudi/goteo-project-twitter-plugin.git</code></pre>
+<p>Install the required dependencies:</p>
+<pre><code class="language-bash">cd your-goteo-path/extend/goteo-project-twitter-plugin
+composer install</code></pre>
+<p>Now go to <a href="https://apps.twitter.com">https://apps.twitter.com</a>, create a new custom app, grab the Consumer Key and Secret, generate an Access Token and Secret.</p>
+<p>Then add in your <code>config/settings.yml</code>, in the section &quot;plugins&quot;:</p>
+<pre><code>plugins:
+    goteo-project-twitter-plugin:
+        active: true
+        oauth_access_token: YOUR_OAUTH_ACCESS_TOKEN
+        oauth_access_token_secret: YOUR_OAUTH_ACCESS_TOKEN_SECRET
+        consumer_key: YOUR_CONSUMER_KEY
+        consumer_secret: YOUR_CONSUMER_SECRET
+</code></pre>
+<p>That's it, every time a project is published, a twit will be created in the account where the Twitter app is created.</p>
+<p>@Author
+Ivan Vergés</p>
+<p>@License
+AGPL 3.0</p>
                 </section>
 
             </div>

@@ -125,12 +125,61 @@
 
                 
                 <section class="col-sm-offset-3 col-lg-offset-2 col-sm-9 col-lg-10">
-                    <h1 id="deprecated">DEPRECATED</h1>
-<p>This directory contains the historical SQL commmand updater.
-It won't be updated anymore</p>
-<p>The prefered way to update the database is now:</p>
-<pre><code class="language-bash">./bin/console migrate all</code></pre>
-<p>Referer to the <em>UPGRADE</em> section in docs for further documentation.</p>
+                    <h1 id="custom-domains-plugin">CUSTOM DOMAINS PLUGIN</h1>
+<h2 id="this-plugin-provides-custom-domains-and-redirections-for-goteo">This plugin provides custom domains and redirections for Goteo</h2>
+<p>Activating and properly configuring this plugin enables the ability to show the content of any path defined as it was an independent webpage with his own domain (or subdomain).</p>
+<p>For example <a href="http://example.com/project/my-project">http://example.com/project/my-project</a> could be configured to be accessed with a custom domain: <a href="http://my-project.org/">http://my-project.org/</a> or a custom subdomains <a href="http://my-project.example.com/">http://my-project.example.com/</a></p>
+<h2 id="configuration">Configuration:</h2>
+<h3 id="custom-domains">Custom domains</h3>
+<p>Configuration must be done in the general <code>config/settings.yml</code> Goteo config file.</p>
+<p>Multiple path can be specified for any domain</p>
+<p>The first path is the one treated as index (will convert the path to &quot;/&quot;)</p>
+<p>Next paths will be appended to the custom domain as they are in the main domain</p>
+<blockquote>
+<p><strong>NOTES:</strong> </p>
+<ul>
+<li>DNS domains/subdomains configured in this plugin must be configured in the DNS provider to point to the main Installation url.</li>
+<li>Paths are treated as prefixes, any following url starting with the same path will use the custom domain as well</li>
+<li>DO NOT PUT http:// or https:// in custom domain blocks</li>
+<li>There's no automatic treatment of the session between different domains (although they should work in subdomains), so the user session won't be conserved.</li>
+</ul>
+</blockquote>
+<h3 id="custom-redirections">Custom redirections</h3>
+<p>This plugin allows also to define arbitrary redirections that may be useful in some cases. They are just a list of an origin =&gt; destination.</p>
+<blockquote>
+<p><strong>NOTES</strong></p>
+<ul>
+<li>Redirects works based on prefix</li>
+<li>Order is important, the first matching prefix will be used and the rest ignored</li>
+</ul>
+</blockquote>
+<h3 id="settings-example">Settings example</h3>
+<pre><code class="language-yaml">...
+
+plugins:
+    goteo-dev:
+        active: false # Dev plugin
+
+    custom-plugin:
+        active: true # If I have some custom plugin activated...
+
+    custom-domins: # Custom Domains plugin
+        active: true
+        # Define custom domains here
+        domains:
+            blog.example.com:
+                - /blog
+            nice-project.org:
+                - /project/ugly-project
+            search.example.com:
+                - /discover
+        # Define custom redirects here
+        redirects:
+            direct.example.com/p: http://example.com/project/some-project
+            blog.example.com/p: http://blog.example.com/
+
+...
+</code></pre>
                 </section>
 
             </div>

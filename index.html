@@ -94,6 +94,11 @@
                                         </a>
                                     </li>
                                                                     <li class="">
+                                        <a href="http://goteofoundation.github.io/goteo/docs/developers/events.html">
+                                            Using events
+                                        </a>
+                                    </li>
+                                                                    <li class="">
                                         <a href="http://goteofoundation.github.io/goteo/docs/developers/consoledev.html">
                                             Extending console
                                         </a>
@@ -127,7 +132,7 @@
 <p>This is a web app that allows the receipt, review and publishing of collective campaigns for their collective funding and the receiving of collaborations as well as the dynamic visualization of the support received, classification of initiatives and campaign tracking. The system also permits secure and distributed communication with users and between users, administration of highlighted projects on the home page and the creation of periodical publications such as blogs, a FAQ section and static pages.</p>
 </blockquote>
 <p>Current version: <strong>3.3</strong></p>
-<p>Although you can try to install it in order to create your own crowdfunding platform, this won't be a <em>Wordpress</em>-like installation (probably never will). This releases are mostly for developers and for those who want to collaborate with the code.</p>
+<p>Although you can try to install it in order to create your own crowdfunding platform, this won't be a <em>Wordpress</em>-like installation (probably never will). These releases are mostly for developers and for those who want to collaborate with the code.</p>
 <p>Full developers documentation is still work in progress!
 Some folders may have its own README.md file with comments. However, we will try to compile all the documents here:</p>
 <h3 id="documentation">DOCUMENTATION</h3>
@@ -139,41 +144,45 @@ Some folders may have its own README.md file with comments. However, we will try
 <h3 id="docker-quickstart">Docker quickstart:</h3>
 <pre><code class="language-bash">cp config/docker-settings.yml config/local-docker-settings.yml
 docker-compose up</code></pre>
-<p>THen you can run commands inside the php container by using the wrapper <code>docker/exec</code>. If develping, we recommend to run this command in a separate terminal:</p>
+<p>Then you can run commands inside the php container by using the wrapper <code>docker/exec</code>. If develping, we recommend to run this command in a separate terminal:</p>
 <pre><code class="language-bash">docker/exec grunt watch</code></pre>
 <p><a href="http://goteofoundation.github.io/goteo/docs/developers/environment.html#docker">More info</a></p>
 </blockquote>
 <h3 id="contributing">CONTRIBUTING</h3>
-<p>There's still a lot of documentation missing. We'll try to do our best completing it, however any help will be appreciated.</p>
+<p>There's still a lot of missing documentation. We'll try to do our best completing it, however any help will be appreciated.</p>
 <ul>
 <li><a href="http://goteofoundation.github.io/goteo/docs/developers/environment.html">Developers</a></li>
 <li><a href="http://goteofoundation.github.io/goteo/release_notes.html">Credits</a></li>
 </ul>
 <h3 id="translators">TRANSLATORS</h3>
-<p>Since version 3.3 where are using <a href="https://crowdin.com/">Crowdin</a> as a tool for collaborators translating the code. Feel free to join this awesome people who's contributed in traslating Goteo to many languages:</p>
+<p>Since version 3.3 where are using <a href="https://crowdin.com/">Crowdin</a> as a tool for collaborators translating the code. Feel free to join these awesome people who's contributed in traslating Goteo to many languages:</p>
 <translators><ul><li>Dan Walenter (cas3v0n)</li>
+    <li>mrfinearts</li>
     <li>Denver Moon (9003104)</li>
     <li>José Peralta (elpoliglota) (josedpg11)</li>
     <li>Chris_W</li>
-    <li>helpPAM</li>
-    <li>melsmacan</li>
+    <li>mikahz</li>
+    <li>enolp</li>
+    <li>Udo Wierlemann (Udo.Wierlemann)</li>
+    <li>pep_laDeriva</li>
+    <li>Vanessa.Montes</li>
+    <li>CataAz</li>
+    <li>Ferran Reyes (ferranreyesgoteo)</li>
     <li>kguanzon (Kimberly Guanzon) (kim0421)</li>
     <li>joao.cruz</li>
-    <li>pep_laDeriva</li>
-    <li>CataAz</li>
+    <li>helpPAM</li>
     <li>Clint Mark Cortes (cortesclintmark)</li>
-    <li>zainalkhalid</li>
-    <li>franzancot</li>
-    <li>Udo Wierlemann (Udo.Wierlemann)</li>
-    <li>Herii (HERII12)</li>
-    <li>shaunmatthew</li>
-    <li>Ceyda Mutlu (translator93)</li>
     <li>Júlia Petúlia Sol (juliaxsol)</li>
-    <li>enolp</li>
+    <li>zainalkhalid</li>
+    <li>melsmacan</li>
+    <li>franzancot</li>
     <li>elena-2018</li>
+    <li>shaunmatthew</li>
     <li>firewall (Onrkskn)</li>
+    <li>Ceyda Mutlu (translator93)</li>
+    <li>Herii (HERII12)</li>
 </ul></translators>
-<p>You can join to the Crowdin translator team here: <a href="https://translate.goteo.org/">https://translate.goteo.org/</a></p>
+<p>You can join the Crowdin translator team here: <a href="https://translate.goteo.org/">https://translate.goteo.org/</a></p>
 <p><em>This documentation is created using <a href="http://couscous.io">Couscous</a>.</em></p>
 <h2 id="license">License</h2>
 <p>The code licensed here under the <strong>GNU Affero General Public License</strong>, version 3 AGPL-3.0 has been developed by the Goteo team led by Platoniq and subsequently transferred to the Fundación Goteo, as detailed in <a href="http://www.goteo.org/about#info6">http://www.goteo.org/about#info6</a></p>
